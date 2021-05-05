@@ -5,6 +5,7 @@
 import math
 import sys
 
+
 def example1():
     # THIS IS A LONG COMMENT AND should be wrapped to fit within a 72
     # character limit
@@ -48,7 +49,7 @@ class Example3(object):
             bar = bar * bar
             return bar
         else:
-                some_string = """
+            some_string = """
                     don't touch indents in mult str, code should be reindented
                     THIS IS MORE CODE
 """
