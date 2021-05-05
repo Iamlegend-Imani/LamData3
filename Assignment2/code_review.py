@@ -5,7 +5,6 @@
 import math
 import sys
 
-
 def example1():
     # THIS IS A LONG COMMENT AND should be wrapped to fit within a 72
     # character limit
