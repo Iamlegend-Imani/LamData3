@@ -14,42 +14,66 @@ df = pd.DataFrame()
 
 def null_count(df):
     """This functions returns the number of null values in a Dataframe"""
-    NullSum = df.isnull().sum().sum()
-    return NullSum
+    return df.isnull().sum().sum()
     
 
-def train_test_split(dg):
+def train_test_split(dg,frac):
     """Create a Train/Test split function for a dataframe and returns both the Training and Testing sets. 
     Frac referes to the precent of data you would like to set aside for training."""
-    train, test = train_test_split(dg)
+    train, test = sk_train_test_split(df, train_size=frac)
     return train, test
-    # train, test = df.train_test_split(df,frac=0.2)
-    # return (train, test)
 
-def randomize(dg, seed):
+def randomize(df, seed):
     """Develop a randomization function that randomizes all of a dataframes cells then returns that randomized dataframe. 
     This function should also take a random seed for reproducible randomization."""
-    Randomy = randomize(dg, seed==101)
-    return Randomy
+    df = df.sample(
+            frac=1,
+            axis=1,
+            random_state=42).sample(
+                frac=1,
+                random_state=42).reset_index(drop=True)
+    return df
 
-# def split_dates(date_series):
-#     """Splits date into month, day and year"""
-#     ds = pd.DataFrame()
-#     ds['date'] = date_series
-#     ds[["day","month","year"]] = ds['date'].str.split("/", expand=True)
-#     ds.drop(columns = 'date',inplace=True)
-#     return ds
+def addy_split(df, addy_series):
+        # convert addresses into series
+    addr = pd.Series(addy_series)
 
-def split_dates(date_series):
-    """This function converts date column to a year, month, day column"""
-    ds = pd.DataFrame()
-    ds['year'] = pd.Series(ds[date_series].dt.year)
-    ds['month'] = pd.Series(ds[date_series].dt.month)
-    ds['day'] = pd.Series(ds[date_series].dt.day)
-    return ds
+        # Split Address  on '\n'
+    add1 = addr.str.split('\n')
 
-if __name__ == "__main__":
-    print(null_count(dg))
-    print(randomize(dg, seed=101))
-    print(train_test_split(dg, frac=0.1))
-    
+        # Get city state and zip into column
+    df_add = pd.DataFrame(add1)
+
+    for i, val in enumerate(addr):
+        if i < len(addr):
+            df_add['city_st_zip'] = add1[i][1]
+            i += 1
+
+        # Split city_st_zip on ','
+    city_st_zip = df_add['city_st_zip'].str.split(',')
+
+        # Put city into column
+    for i, val in enumerate(city_st_zip):
+        if i < len(city_st_zip):
+            df_add['city'] = city_st_zip[i][0]
+            df_add['st_zip'] = city_st_zip[i][1]
+            i += 1
+
+        # Split st_zip on ' '
+    st_zip = df_add['st_zip'].str.split(' ')
+
+        # Put state and zip into columns
+    for i, val in enumerate(st_zip):
+        if i < len(st_zip):
+            df_add['state'] = st_zip[i][1]
+            df_add['zip'] = st_zip[i][2]
+            i += 1
+
+        # Drop unnessary columns
+    drop_cols = [0, 'city_st_zip', 'st_zip']
+    df_add.drop(
+        columns=drop_cols,
+        inplace=True
+        )
+
+    return df_add
