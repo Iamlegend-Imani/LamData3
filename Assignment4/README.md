@@ -1,6 +1,3 @@
-# LamData3
-A repo that contains a package that will contain a collection of modules
-
 This is a package to help us learn about libraries, .py files, OOP, and testing
 
 ## Essential Features
@@ -9,8 +6,8 @@ This is a package to help us learn about libraries, .py files, OOP, and testing
 - **code_review.py**: a file that converted long code into Pip8 standardization
 - **example_module.py**: a file created to show .py files and how they worked. essentially useless now
 - **helper_functions.py**: a file containing a bunch of functions for coding and class creation practice
-- **helper_functions2.py**: a file that contains data to test helper_functions
-- **examples.py**: a file that contains object oriented programming examples done in Lambda lecture
+- **ref_helper_functions.py**: a file that contains data to test helper_functions
+- **oop_examples.py**: a file that contains object oriented programming examples done in Lambda lecture
 - **string_tests.py**: a file that shows Unit Testing done in Module 4 warm-up
 - **wallet.py**: a class that defines features and methods of a wallet (Lambda Lecture)
 

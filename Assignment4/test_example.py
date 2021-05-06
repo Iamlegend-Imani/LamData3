@@ -6,4 +6,5 @@ from example import increment, COLORS
 
 
 def increment():
+
     assert increment(3) == 3
