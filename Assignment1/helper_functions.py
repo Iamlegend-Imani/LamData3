@@ -8,15 +8,16 @@ import math
 import sys
 sys.setrecursionlimit(5000)
 
-lists = [0,20,None,100,50,30,None,0,20,50]
+lists = [0, 20, None, 100, 50, 30, None, 0, 20, 50]
 dg = pd.DataFrame(lists)
 df = pd.DataFrame()
+
 
 def null_count(df):
     """This functions returns the number of null values in a Dataframe"""
     NullSum = df.isnull().sum().sum()
     return NullSum
-    
+
 
 def train_test_split(dg):
     """Create a Train/Test split function for a dataframe and returns both the Training and Testing sets. 
@@ -26,10 +27,11 @@ def train_test_split(dg):
     # train, test = df.train_test_split(df,frac=0.2)
     # return (train, test)
 
+
 def randomize(dg, seed):
     """Develop a randomization function that randomizes all of a dataframes cells then returns that randomized dataframe. 
     This function should also take a random seed for reproducible randomization."""
-    Randomy = randomize(dg, seed==101)
+    Randomy = randomize(dg, seed == 101)
     return Randomy
 
 # def split_dates(date_series):
@@ -40,6 +42,7 @@ def randomize(dg, seed):
 #     ds.drop(columns = 'date',inplace=True)
 #     return ds
 
+
 def split_dates(date_series):
     """This function converts date column to a year, month, day column"""
     ds = pd.DataFrame()
@@ -48,8 +51,8 @@ def split_dates(date_series):
     ds['day'] = pd.Series(ds[date_series].dt.day)
     return ds
 
+
 if __name__ == "__main__":
     print(null_count(dg))
     print(randomize(dg, seed=101))
     print(train_test_split(dg, frac=0.1))
-    
